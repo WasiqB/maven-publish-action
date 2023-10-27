@@ -1,38 +1,27 @@
 {
-	"name": "action-maven-publish",
-	"version": "1.4.0",
-	"description": "GitHub Action for automatically publishing Maven packages",
-	"author": {
-		"name": "Samuel Meuli",
-		"email": "me@samuelmeuli.com",
-		"url": "https://samuelmeuli.com"
-	},
-	"repository": "github:samuelmeuli/action-maven-publish",
-	"private": true,
-	"main": "./index.js",
-	"scripts": {
-		"lint": "eslint --ignore-path ./.gitignore --max-warnings 0 '**/*.js'",
-		"lint:fix": "yarn lint --fix",
-		"format": "prettier --ignore-path ./.gitignore --list-different '**/*.{css,html,js,json,jsx,less,md,scss,ts,tsx,vue,yaml,yml}'",
-		"format:fix": "yarn format --write"
-	},
-	"dependencies": {},
-	"peerDependencies": {},
-	"devDependencies": {
-		"@samuelmeuli/eslint-config": "^6.0.0",
-		"@samuelmeuli/prettier-config": "^1.0.0",
-		"eslint": "6.8.0",
-		"eslint-config-airbnb-base": "14.0.0",
-		"eslint-config-prettier": "^6.10.0",
-		"eslint-plugin-import": "^2.20.1",
-		"prettier": "^1.19.1"
-	},
-	"eslintConfig": {
-		"root": true,
-		"extends": "@samuelmeuli/eslint-config",
-		"env": {
-			"node": true
-		}
-	},
-	"prettier": "@samuelmeuli/prettier-config"
+  "name": "maven-publish-action",
+  "version": "1.0.0",
+  "description": "GitHub Action for automatically publishing to Maven central",
+  "author": {
+    "name": "Wasiq Bhamla",
+    "email": "wasbhamla2005@gmail.com",
+    "url": "https://github.com/WasiqB"
+  },
+  "repository": "github:WasiqB/maven-publish-action",
+  "private": true,
+  "main": "./index.js",
+  "scripts": {
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "devDependencies": {
+    "eslint": "8.52.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3"
+  }
 }

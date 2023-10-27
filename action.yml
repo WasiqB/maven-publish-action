@@ -1,6 +1,6 @@
-name: action-maven-publish
-author: Samuel Meuli
-description: GitHub Action for automatically publishing Maven packages
+name: maven-publish-action
+author: Wasiq Bhamla
+description: GitHub Action for automatically publishing to Maven Central
 
 inputs:
   gpg_private_key:
@@ -36,7 +36,7 @@ inputs:
     default: "deploy"
 
 runs:
-  using: node12
+  using: node16
   main: ./index.js
 
 branding:

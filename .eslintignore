@@ -1,0 +1,8 @@
+node_modules/
+docs/
+test/
+.github/
+pnpm-lock.yaml
+*.xml
+*.md
+*.yml

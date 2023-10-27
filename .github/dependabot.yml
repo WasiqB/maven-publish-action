@@ -1,0 +1,42 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    target-branch: "main"
+    versioning-strategy: increase
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      timezone: "Asia/Calcutta"
+
+  - package-ecosystem: "maven"
+    directory: "/test/with-gpg"
+    target-branch: "main"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      timezone: "Asia/Calcutta"
+
+  - package-ecosystem: "maven"
+    directory: "/test/with-profiles"
+    target-branch: "main"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      timezone: "Asia/Calcutta"
+
+  - package-ecosystem: "maven"
+    directory: "/test/without-gpg"
+    target-branch: "main"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      timezone: "Asia/Calcutta"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "main"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: daily
+      timezone: "Asia/Calcutta"

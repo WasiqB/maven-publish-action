@@ -56,12 +56,14 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Java and Maven
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Release Maven package
         uses: samuelmeuli/action-maven-publish@v1

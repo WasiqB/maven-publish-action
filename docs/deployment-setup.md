@@ -56,7 +56,7 @@ To configure your Maven project for deployment to OSSRH, add the following secti
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>2.4</version>
+            <version>3.3.0</version>
             <executions>
               <execution>
                 <id>attach-sources</id>
@@ -71,7 +71,7 @@ To configure your Maven project for deployment to OSSRH, add the following secti
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.10.4</version>
+            <version>3.6.0</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -86,7 +86,7 @@ To configure your Maven project for deployment to OSSRH, add the following secti
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-gpg-plugin</artifactId>
-              <version>1.6</version>
+              <version>3.1.0</version>
               <executions>
                   <execution>
                       <id>sign-artifacts</id>
@@ -115,7 +115,7 @@ To configure your Maven project for deployment to OSSRH, add the following secti
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.8</version>
+        <version>1.6.13</version>
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>

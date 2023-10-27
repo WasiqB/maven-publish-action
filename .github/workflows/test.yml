@@ -27,6 +27,19 @@ jobs:
         with:
           java-version: 17
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run action
         uses: ./
         with:
@@ -50,6 +63,19 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Install GPG
         if: startsWith(matrix.os, 'macos')
@@ -79,6 +105,19 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Run action
         uses: ./

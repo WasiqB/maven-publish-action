@@ -30,7 +30,7 @@ jobs:
       - name: Run action
         uses: ./
         with:
-          directory: ./test/without-gpg/
+          directory: ${{ github.workspace }}/test/without-gpg/
           nexus_username: ${{ env.NEXUS_USERNAME }}
           nexus_password: ${{ env.NEXUS_PASSWORD }}
 
@@ -58,7 +58,7 @@ jobs:
       - name: Run action
         uses: ./
         with:
-          directory: ./test/with-gpg/
+          directory: ${{ github.workspace }}/test/with-gpg/
           gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
           gpg_passphrase: ${{ env.GPG_PASSPHRASE }}
           nexus_username: ${{ env.NEXUS_USERNAME }}
@@ -83,7 +83,7 @@ jobs:
       - name: Run action
         uses: ./
         with:
-          directory: ./test/with-profiles/
+          directory: ${{ github.workspace }}/test/with-profiles/
           nexus_username: ${{ env.NEXUS_USERNAME }}
           nexus_password: ${{ env.NEXUS_PASSWORD }}
           maven_profiles: release

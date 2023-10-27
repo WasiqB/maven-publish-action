@@ -1,3 +1,4 @@
+const core = require('@actions/core');
 const { execSync } = require('child_process');
 const { unlinkSync, writeFileSync } = require('fs');
 const path = require('path');
@@ -24,50 +25,35 @@ function run(cmd, cwd = null) {
 }
 
 /**
- * Returns the value for an environment variable
- * @param name {string}: Name of the environment variable
- * @returns {string | undefined}: Value of the environment variable
- */
-function getEnv(name) {
-  return process.env[name];
-}
-
-/**
- * Returns the value for an input variable. If the variable is required and doesn't have a value,
- * abort the action
- * @param name {string}: Name of the input variable
- * @param required {boolean}: If set to true, the action will exit if the variable is not defined
- * @returns {string | null}: Value of the input variable
- */
-function getInput(name, required = false) {
-  const value = getEnv(name.toUpperCase());
-  if (value == null) {
-    // Value is either not set (`undefined`) or set to `null`
-    if (required) {
-      throw new Error(`"${name}" input variable is not defined`);
-    }
-    return null;
-  }
-  return value;
-}
-
-/**
  * Deploys the Maven project
  */
 function runAction() {
-  // Make sure the required input variables are provided
-  getInput('nexus_username', true);
-  getInput('nexus_password', true);
+  const options = {
+    trimWhitespace: true,
+  };
 
-  const mavenArgs = getInput('maven_args') || '';
-  const mavenGoalsPhases = getInput('maven_goals_phases') || 'clean deploy';
-  const mavenProfiles = getInput('maven_profiles');
+  // Make sure the required input variables are provided
+  core.getInput('nexus_username', {
+    required: true,
+    ...options,
+  });
+  core.getInput('nexus_password', {
+    required: true,
+    ...options,
+  });
+
+  const mavenArgs = core.getInput('maven_args', options) || '';
+  const mavenGoalsPhases = core.getInput('maven_goals_phases', options) || 'clean deploy';
+  const mavenProfiles = core.getInput('maven_profiles', options);
 
   // Import GPG key into keychain
-  const privateKey = getInput('gpg_private_key').trim();
+  const privateKey = core.getInput('gpg_private_key', options).trim();
   if (privateKey) {
     // Make sure passphrase is provided
-    getInput('gpg_passphrase', true);
+    core.getInput('gpg_passphrase', {
+      required: true,
+      ...options,
+    });
 
     // Import private key (write into temporary file and import that file)
     log('Importing GPG key…');
@@ -86,7 +72,7 @@ function runAction() {
 		mvn ${mavenGoalsPhases} --batch-mode ${mavenProfileArg} \
 		--settings ${mavenSettingsPath} ${mavenArgs}
 		`,
-    getInput('directory') || null
+    core.getInput('directory', options) || null
   );
 }
 

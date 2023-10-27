@@ -59,9 +59,9 @@ function runAction() {
   getInput('nexus_username', true);
   getInput('nexus_password', true);
 
-  const mavenArgs = getInput('maven_args', true);
-  const mavenGoalsPhases = getInput('maven_goals_phases', true);
-  const mavenProfiles = getInput('maven_profiles', true);
+  const mavenArgs = getInput('maven_args') || '';
+  const mavenGoalsPhases = getInput('maven_goals_phases') || 'clean deploy';
+  const mavenProfiles = getInput('maven_profiles') || 'deploy';
 
   // Import GPG key into keychain
   const privateKey = getInput('gpg_private_key').trim();

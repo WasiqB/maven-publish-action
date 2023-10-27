@@ -1,0 +1,44 @@
+name: action-maven-publish
+author: Samuel Meuli
+description: GitHub Action for automatically publishing Maven packages
+
+inputs:
+  gpg_private_key:
+    description: GPG private key for signing the published artifacts
+    required: false
+  gpg_passphrase:
+    description: Passphrase for the GPG key
+    required: false
+  nexus_username:
+    description: Username (not email!) for your Nexus repository manager account
+    required: true
+  nexus_password:
+    description: Password for your Nexus account
+    required: true
+  server_id:
+    description: Nexus server ID as specified in your project's `nexus-staging-maven-plugin` and `distributionManagement` configurations
+    required: false
+    default: ossrh
+  directory:
+    description: Directory of the Maven project which should be deployed
+    required: false
+  maven_goals_phases:
+    description: Maven goals and build phases to execute
+    required: false
+    default: clean deploy
+  maven_args:
+    description: Additional arguments to pass to the Maven command
+    required: false
+    default: ""
+  maven_profiles:
+    description: Active Maven profiles
+    required: false
+    default: "deploy"
+
+runs:
+  using: node12
+  main: ./index.js
+
+branding:
+  icon: upload-cloud
+  color: orange

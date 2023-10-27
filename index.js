@@ -40,7 +40,7 @@ function getEnv(name) {
  * @returns {string | null}: Value of the input variable
  */
 function getInput(name, required = false) {
-  const value = getEnv(`INPUT_${name.toUpperCase()}`);
+  const value = getEnv(name.toUpperCase());
   if (value == null) {
     // Value is either not set (`undefined`) or set to `null`
     if (required) {

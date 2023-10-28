@@ -9,7 +9,7 @@ updates:
       interval: daily
       timezone: "Asia/Calcutta"
     groups:
-      dependency-type: production
+      dependency-type: "production"
 
   - package-ecosystem: "maven"
     directory: "/test/with-gpg"
@@ -19,7 +19,7 @@ updates:
       interval: daily
       timezone: "Asia/Calcutta"
     groups:
-      dependency-type: production
+      dependency-type: "production"
 
   - package-ecosystem: "maven"
     directory: "/test/with-profiles"
@@ -29,7 +29,7 @@ updates:
       interval: daily
       timezone: "Asia/Calcutta"
     groups:
-      dependency-type: production
+      dependency-type: "production"
 
   - package-ecosystem: "maven"
     directory: "/test/without-gpg"
@@ -39,7 +39,7 @@ updates:
       interval: daily
       timezone: "Asia/Calcutta"
     groups:
-      dependency-type: production
+      dependency-type: "production"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -49,4 +49,4 @@ updates:
       interval: daily
       timezone: "Asia/Calcutta"
     groups:
-      dependency-type: production
+      dependency-type: "production"

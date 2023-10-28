@@ -22,6 +22,9 @@ inputs:
   directory:
     description: Directory of the Maven project which should be deployed
     required: false
+  settings_path:
+    description: Directory path for Maven settings file
+    required: false
   maven_goals_phases:
     description: Maven goals and build phases to execute
     required: false
@@ -36,9 +39,9 @@ inputs:
     default: "deploy"
 
 runs:
-  using: node16
+  using: node20
   main: ./index.js
 
 branding:
   icon: upload-cloud
-  color: orange
+  color: blue

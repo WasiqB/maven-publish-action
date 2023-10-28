@@ -42,7 +42,7 @@ gpg --keyserver hkps://keys.openpgp.org --send-keys KEY_ID
 
 ## Project Configuration
 
-To configure your Maven project for deployment to OSSRH, add the following sections to your `pom.xml` file. You'll add a `deploy` profile, which is executed in the `deploy` lifecycle phase. It includes the `maven-source-plugin` for generating source JAR files, the `maven-javadoc-plugin` for including the Javadocs and the `maven-gpg-plugin` for signing your artifacts. You'll also configure the remote repository (`ossrh`):
+To configure your Maven project for deployment to OSSRH, add the following sections to your `pom.xml` file. You'll add a `deploy` profile, which is executed in the `deploy` lifecycle phase. It includes the `maven-source-plugin` for generating source JAR files, the `maven-javadoc-plugin` for including the JavaDocs and the `maven-gpg-plugin` for signing your artifacts. You'll also configure the remote repository (`ossrh`):
 
 ```xml
 <project>
@@ -119,7 +119,7 @@ To configure your Maven project for deployment to OSSRH, add the following secti
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>false</autoReleaseAfterClose>
         </configuration>
       </plugin>
@@ -130,7 +130,7 @@ To configure your Maven project for deployment to OSSRH, add the following secti
     <!-- Central Repository -->
     <snapshotRepository>
       <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 </project>

@@ -4,7 +4,6 @@ const { unlinkSync, writeFileSync } = require('fs');
 const path = require('path');
 
 const gpgKeyPath = path.join(__dirname, 'private-key.txt');
-const mavenSettingsPath = path.join(__dirname, 'settings.xml');
 
 /**
  * Logs to the console
@@ -67,6 +66,9 @@ function runAction() {
   // deployment and not in the install phase
   log('Deploying the Maven project…');
   const mavenProfileArg = mavenProfiles ? `--activate-profiles ${mavenProfiles}` : '';
+  const mavenSettingsPath =
+    core.getInput('settings_path', options) || path.join(__dirname, 'settings.xml');
+
   run(
     `
 		mvn ${mavenGoalsPhases} --batch-mode ${mavenProfileArg} \

@@ -40,7 +40,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm add -g @vercel/ncc
+          pnpm install
 
       - name: Run action
         uses: ./
@@ -79,7 +81,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm add -g @vercel/ncc
+          pnpm install
 
       - name: Install GPG
         if: startsWith(matrix.os, 'macos')
@@ -123,7 +127,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm add -g @vercel/ncc
+          pnpm install
 
       - name: Run action
         uses: ./

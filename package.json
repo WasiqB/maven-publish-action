@@ -15,7 +15,7 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "prepare": "npx ncc build lib/index.js -o dist --minify"
+    "prepare": "ncc build lib/index.js -o dist --minify"
   },
   "devDependencies": {
     "eslint": "8.52.0",

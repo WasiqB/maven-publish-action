@@ -1,7 +1,6 @@
 name: maven-publish-action
 author: Wasiq Bhamla
 description: GitHub Action for automatically publishing to Maven Central
-
 inputs:
   gpg_private_key:
     description: GPG private key for signing the published artifacts
@@ -16,7 +15,9 @@ inputs:
     description: Password for your Nexus account
     required: true
   server_id:
-    description: Nexus server ID as specified in your project's `nexus-staging-maven-plugin` and `distributionManagement` configurations
+    description: |
+      Nexus server ID as specified in your project's
+      `nexus-staging-maven-plugin` and `distributionManagement` configurations
     required: false
     default: ossrh
   directory:
@@ -32,16 +33,14 @@ inputs:
   maven_args:
     description: Additional arguments to pass to the Maven command
     required: false
-    default: ""
+    default: ''
   maven_profiles:
     description: Active Maven profiles
     required: false
-    default: "deploy"
-
+    default: deploy
 runs:
   using: node20
-  main: ./index.js
-
+  main: dist/index.js
 branding:
   icon: upload-cloud
   color: blue

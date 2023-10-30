@@ -43,6 +43,7 @@ jobs:
         run: |
           pnpm add -g @vercel/ncc
           pnpm install
+          ls dist
 
       - name: Run action
         uses: ./

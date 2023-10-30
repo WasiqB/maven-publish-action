@@ -24,7 +24,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm add -g @vercel/ncc
+          pnpm install
 
       - name: Lint
         run: |

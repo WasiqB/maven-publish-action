@@ -9,7 +9,7 @@
   },
   "repository": "github:WasiqB/maven-publish-action",
   "private": true,
-  "main": "./index.js",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
     "lint:fix": "eslint --fix",

@@ -11,10 +11,10 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint '**/*.js'",
-    "lint:fix": "eslint --fix",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
+    "lint": "eslint 'lib/*.js'",
+    "lint:fix": "eslint --fix lib/**.js",
+    "format": "prettier --check lib/**.js",
+    "format:fix": "prettier --write lib/**.js",
     "prepare": "ncc build lib/index.js -o dist --minify"
   },
   "devDependencies": {

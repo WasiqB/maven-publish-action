@@ -1,17 +1,12 @@
-const core = require('@actions/core');
-const { execSync } = require('child_process');
-const { unlinkSync, writeFileSync } = require('fs');
-const path = require('path');
+import core from '@actions/core';
+import { execSync } from 'child_process';
+import { unlinkSync, writeFileSync } from 'fs';
+import { Toolkit } from 'actions-toolkit';
+import path from 'path';
+import { InputType } from 'actions-toolkit/lib/inputs';
+import { OutputType } from 'actions-toolkit/lib/outputs';
 
 const gpgKeyPath = path.join(__dirname, 'private-key.txt');
-
-/**
- * Logs to the console
- * @param msg {string}: Text to log to the console
- */
-function log(msg) {
-  console.log(msg); // eslint-disable-line no-console
-}
 
 /**
  * Executes the provided shell command and redirects stdout/stderr to the console
@@ -19,19 +14,18 @@ function log(msg) {
  * @param cwd {string | null}: Directory in which the command should be run
  * @returns {Buffer | string}: The stdout from the command
  */
-function run(cmd, cwd = null) {
-  return execSync(cmd, { encoding: 'utf8', stdio: 'inherit', cwd });
+function run(cmd: string, cwd: string | URL | undefined = undefined): string | Buffer {
+  return execSync(cmd, { encoding: 'utf8', stdio: 'inherit', cwd: cwd });
 }
 
 /**
  * Deploys the Maven project
  */
-function runAction() {
+async function runAction(tool: Toolkit<InputType, OutputType>): Promise<void> {
   const options = {
     trimWhitespace: true,
   };
 
-  // Make sure the required input variables are provided
   core.getInput('nexus_username', {
     required: true,
     ...options,
@@ -45,26 +39,20 @@ function runAction() {
   const mavenGoalsPhases = core.getInput('maven_goals_phases', options) || 'clean deploy';
   const mavenProfiles = core.getInput('maven_profiles', options);
 
-  // Import GPG key into keychain
   const privateKey = core.getInput('gpg_private_key', options).trim();
   if (privateKey) {
-    // Make sure passphrase is provided
     core.getInput('gpg_passphrase', {
       required: true,
       ...options,
     });
 
-    // Import private key (write into temporary file and import that file)
-    log('Importing GPG key…');
+    tool.log('Importing GPG key…');
     writeFileSync(gpgKeyPath, privateKey);
     run(`gpg --import --batch ${gpgKeyPath}`);
     unlinkSync(gpgKeyPath);
   }
 
-  // Deploy to Nexus
-  // The "deploy" profile is used in case the user wants to perform certain steps only during
-  // deployment and not in the install phase
-  log('Deploying the Maven project…');
+  tool.log('Deploying the Maven project…');
   const mavenProfileArg = mavenProfiles ? `--activate-profiles ${mavenProfiles}` : '';
   const mavenSettingsPath =
     core.getInput('settings_path', options) || path.join(__dirname, 'settings.xml');
@@ -74,8 +62,8 @@ function runAction() {
 		mvn ${mavenGoalsPhases} --batch-mode ${mavenProfileArg} \
 		--settings ${mavenSettingsPath} ${mavenArgs}
 		`,
-    core.getInput('directory', options) || null
+    core.getInput('directory', options) || undefined
   );
 }
 
-runAction();
+Toolkit.run(async (tool) => await runAction(tool));

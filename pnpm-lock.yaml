@@ -20,8 +20,8 @@ devDependencies:
     specifier: ^18.2.2
     version: 18.2.2
   '@types/node':
-    specifier: ^20.8.10
-    version: 20.8.10
+    specifier: ^20.9.3
+    version: 20.9.3
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.9.1
     version: 6.9.1(@typescript-eslint/parser@6.9.1)(eslint@8.52.0)(typescript@5.2.2)
@@ -356,13 +356,13 @@ packages:
   /@octokit/types@4.1.10:
     resolution: {integrity: sha512-/wbFy1cUIE5eICcg0wTKGXMlKSbaAxEr00qaBXzscLXpqhcwgXeS6P8O0pkysBhRfyjkKjJaYrvR1ExMO5eOXQ==}
     dependencies:
-      '@types/node': 20.8.10
+      '@types/node': 20.9.3
     dev: false
 
   /@octokit/types@5.5.0:
     resolution: {integrity: sha512-UZ1pErDue6bZNjYOotCNveTXArOMZQFG6hKJfOnGnulVCMcVVi7YIIuuR4WfBhjo7zgpmzn/BkPDnUXtNx+PcQ==}
     dependencies:
-      '@types/node': 20.8.10
+      '@types/node': 20.9.3
     dev: false
 
   /@octokit/types@6.41.0:
@@ -403,8 +403,8 @@ packages:
     resolution: {integrity: sha512-Kfe/D3hxHTusnPNRbycJE1N77WHDsdS4AjUYIzlDzhDrS47NrwuL3YW4VITxwR7KCVpzwgy4Rbj829KSSQmwXQ==}
     dev: false
 
-  /@types/node@20.8.10:
-    resolution: {integrity: sha512-TlgT8JntpcbmKUFzjhsyhGfP2fsiz1Mv56im6enJ905xG1DAYesxJaeSbGqQmAw8OWPdhyJGhGSQGKRNJ45u9w==}
+  /@types/node@20.9.3:
+    resolution: {integrity: sha512-nk5wXLAXGBKfrhLB0cyHGbSqopS+nz0BUgZkUQqSHSSgdee0kssp1IAqlQOu333bW+gMNs2QREx7iynm19Abxw==}
     dependencies:
       undici-types: 5.26.5
 
@@ -415,7 +415,7 @@ packages:
   /@types/signale@1.4.6:
     resolution: {integrity: sha512-vd2s2P5D0/U+OvEsDhh2JRAKzzhr+Baa+SL2XRxacdJY8+6bh5iJS8r0TXglhO45duTZPxwpmH9lGHRGtCn8cw==}
     dependencies:
-      '@types/node': 20.8.10
+      '@types/node': 20.9.3
     dev: false
 
   /@typescript-eslint/eslint-plugin@6.9.1(@typescript-eslint/parser@6.9.1)(eslint@8.52.0)(typescript@5.2.2):

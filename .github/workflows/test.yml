@@ -1,8 +1,13 @@
 name: Test
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
 
 env:
   NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
@@ -42,7 +47,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm add -g @vercel/ncc
-          pnpm install
+          pnpm install && pnpm bundle
 
       - name: Run action
         uses: ./
@@ -83,7 +88,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm add -g @vercel/ncc
-          pnpm install
+          pnpm install && pnpm bundle
 
       - name: Install GPG
         if: startsWith(matrix.os, 'macos')
@@ -129,7 +134,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm add -g @vercel/ncc
-          pnpm install
+          pnpm install && pnpm bundle
 
       - name: Run action
         uses: ./

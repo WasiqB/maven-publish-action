@@ -18,7 +18,7 @@ function run(cmd: string, cwd: string | URL | undefined = undefined): string | B
 /**
  * Deploys the Maven project
  */
-export function runAction() {
+export function runAction(): void {
   try {
     const options = {
       trimWhitespace: true,

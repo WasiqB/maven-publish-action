@@ -53,7 +53,7 @@ export function runAction(): void {
     core.debug('Deploying the Maven project…');
     const mavenProfileArg = mavenProfiles ? `--activate-profiles ${mavenProfiles}` : '';
     const mavenSettingsPath =
-      core.getInput('settings_path', options) || path.join(process.cwd(), 'settings.xml');
+      core.getInput('settings_path', options) || path.join(process.cwd(), 'src/settings.xml');
 
     run(
       `
@@ -64,7 +64,9 @@ export function runAction(): void {
     );
     core.setOutput('published', true);
   } catch (error) {
-    // Fail the workflow run if an error occurs
-    if (error instanceof Error) core.setFailed(error.message);
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+      core.setOutput('published', false);
+    }
   }
 }

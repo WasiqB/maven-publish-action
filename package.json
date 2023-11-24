@@ -11,17 +11,18 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint 'lib/*.ts'",
-    "lint:fix": "eslint --fix lib/**.ts",
-    "format": "prettier --check lib/**.ts",
-    "format:fix": "prettier --write lib/**.ts",
-    "prepare": "ncc build lib/index.ts -o dist --minify"
+    "bundle": "npm run format:fix && npm run package",
+    "lint": "eslint 'src/*.ts'",
+    "lint:fix": "eslint --fix src/**.ts",
+    "format": "prettier --check src/**.ts",
+    "format:fix": "prettier --write src/**.ts",
+    "package": "ncc build src/index.ts -o dist --minify -a --license license.txt"
   },
   "devDependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0",
     "@tsconfig/node18": "^18.2.2",
-    "@types/node": "^20.9.4",
+    "@types/node": "^20.9.5",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
     "@typescript-eslint/parser": "^6.12.0",
     "eslint": "8.54.0",
@@ -31,8 +32,5 @@
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "^3.1.0",
     "typescript": "^5.3.2"
-  },
-  "dependencies": {
-    "actions-toolkit": "^6.0.1"
   }
 }

@@ -6,7 +6,7 @@ updates:
     versioning-strategy: increase
     open-pull-requests-limit: 100
     schedule:
-      interval: daily
+      interval: weekly
       timezone: "Asia/Calcutta"
     groups:
       production:
@@ -15,33 +15,33 @@ updates:
         dependency-type: "development"
 
   - package-ecosystem: "maven"
-    directory: "/test/with-gpg"
+    directory: "/javaTest/with-gpg"
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: daily
+      interval: weekly
       timezone: "Asia/Calcutta"
     groups:
       production:
         dependency-type: "production"
 
   - package-ecosystem: "maven"
-    directory: "/test/with-profiles"
+    directory: "/javaTest/with-profiles"
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: daily
+      interval: weekly
       timezone: "Asia/Calcutta"
     groups:
       production:
         dependency-type: "production"
 
   - package-ecosystem: "maven"
-    directory: "/test/without-gpg"
+    directory: "/javaTest/without-gpg"
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: daily
+      interval: weekly
       timezone: "Asia/Calcutta"
     groups:
       production:
@@ -52,7 +52,7 @@ updates:
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: daily
+      interval: weekly
       timezone: "Asia/Calcutta"
     groups:
       production:

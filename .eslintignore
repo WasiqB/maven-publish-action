@@ -1,6 +1,6 @@
 node_modules/
 docs/
-test/
+./javaTest/
 .github/
 pnpm-lock.yaml
 *.xml

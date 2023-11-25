@@ -10,6 +10,7 @@
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
+  "plugins": ["@stylistic/ts", "@stylistic/js"],
   "rules": {
     "@stylistic/ts/indent": ["error", 2],
     "@stylistic/js/linebreak-style": ["error", "unix"],

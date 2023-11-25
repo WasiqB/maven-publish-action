@@ -11,6 +11,12 @@ devDependencies:
   '@actions/github':
     specifier: ^6.0.0
     version: 6.0.0
+  '@stylistic/eslint-plugin-js':
+    specifier: ^1.4.1
+    version: 1.4.1(eslint@8.54.0)
+  '@stylistic/eslint-plugin-ts':
+    specifier: ^1.4.1
+    version: 1.4.1(eslint@8.54.0)(typescript@5.3.2)
   '@tsconfig/node18':
     specifier: ^18.2.2
     version: 18.2.2
@@ -876,6 +882,35 @@ packages:
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
     dependencies:
       '@sinonjs/commons': 3.0.0
+    dev: true
+
+  /@stylistic/eslint-plugin-js@1.4.1(eslint@8.54.0):
+    resolution: {integrity: sha512-WXHPEVw5PB7OML7cLwHJDEcCyLiP7vzKeBbSwmpHLK0oh0JYkoJfTg2hEdFuQT5rQxFy3KzCy9R1mZ0wgLjKrA==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      eslint: '>=8.40.0'
+    dependencies:
+      acorn: 8.11.2
+      escape-string-regexp: 4.0.0
+      eslint: 8.54.0
+      eslint-visitor-keys: 3.4.3
+      espree: 9.6.1
+      graphemer: 1.4.0
+    dev: true
+
+  /@stylistic/eslint-plugin-ts@1.4.1(eslint@8.54.0)(typescript@5.3.2):
+    resolution: {integrity: sha512-zuqnxhWoqPhZcxOb7AiYZz1RF/fUCsbJ7xq60IdRWnEY6MPybqYVJAb+SYilJ3PYxqmz8zdZeYkSeVy6f1fNnA==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      eslint: '>=8.40.0'
+    dependencies:
+      '@stylistic/eslint-plugin-js': 1.4.1(eslint@8.54.0)
+      '@typescript-eslint/utils': 6.12.0(eslint@8.54.0)(typescript@5.3.2)
+      eslint: 8.54.0
+      graphemer: 1.4.0
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
     dev: true
 
   /@tsconfig/node18@18.2.2:

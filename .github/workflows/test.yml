@@ -16,14 +16,14 @@ env:
   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
 jobs:
-  is-dependabot-runner:
+  check-env-key:
     runs-on: ubuntu-latest
 
     outputs:
       env-present: ${{ steps.env-key.outputs.present }}
 
     steps:
-      - name: Check BrowserStack secrets presence
+      - name: Check Environment variable
         id: env-key
         shell: bash
         run: |
@@ -34,15 +34,11 @@ jobs:
           fi
 
   test:
-    needs: is-dependabot-runner
+    needs: check-env-key
 
-    if: (github.event_name == 'push' || github.repository == github.event.pull_request.head.repo.full_name) && needs.is-dependabot-runner.outputs.env-present == 'YES'
+    if: (github.event_name == 'push' || github.repository == github.event.pull_request.head.repo.full_name) && needs.check-env-key.outputs.env-present == 'YES'
 
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out Git repository

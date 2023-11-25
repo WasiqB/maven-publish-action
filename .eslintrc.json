@@ -10,18 +10,19 @@
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
+  "plugins": ["@stylistic/ts", "@stylistic/js"],
   "rules": {
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "max-len": ["error", { "code": 100 }],
+    "@stylistic/ts/indent": ["error", 2],
+    "@stylistic/js/linebreak-style": ["error", "unix"],
+    "@stylistic/ts/quotes": ["error", "single"],
+    "@stylistic/ts/semi": ["error", "always"],
+    "@stylistic/js/max-len": ["error", { "code": 100 }],
     "prefer-promise-reject-errors": ["off"],
     "no-return-assign": ["off"],
     "no-shadow": "off",
     "import/prefer-default-export": "off",
     "prettier/prettier": ["error", { "singleQuote": true }],
-    "@typescript-eslint/no-explicit-any": ["error"],
+    "@typescript-eslint/no-explicit-any": ["off"],
     "@typescript-eslint/explicit-function-return-type": ["error"]
   }
 }

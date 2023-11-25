@@ -29,11 +29,10 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: |
-          pnpm add -g @vercel/ncc
-          pnpm install
+        run: pnpm install
 
-      - name: Lint
-        run: |
-          pnpm lint
-          pnpm format
+      - name: Check Lint
+        run: pnpm lint
+
+      - name: Check Format
+        run: pnpm format

@@ -1,8 +1,0 @@
-node_modules/
-docs/
-./javaTest/
-.github/
-pnpm-lock.yaml
-*.xml
-*.md
-*.yml

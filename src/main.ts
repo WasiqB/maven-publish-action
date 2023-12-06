@@ -53,7 +53,7 @@ export async function runAction(): Promise<void> {
   try {
     getInputOption('nexus_username', true);
     getInputOption('nexus_password', true);
-    const mavenArgs = getInputOption('maven_args');
+    const mavenArgs = getInputOption('maven_args').split(' ');
     const mavenGoalsPhases = getInputOption('maven_goals_phases', false, 'clean deploy');
     const mavenProfiles = getInputOption('maven_profiles');
 
@@ -78,10 +78,10 @@ export async function runAction(): Promise<void> {
         ...mavenGoalsPhases.split(' '),
         ...settingArgs,
         '--batch-mode',
-        mavenArgs,
+        ...mavenArgs,
         ...mavenProfileArg,
       ].filter((str) => str !== ''),
-      getInputOption('directory', false, undefined)
+      getInputOption('directory', false)
     );
     core.setOutput('published', true);
   } catch (error: any) {

@@ -54,6 +54,8 @@ describe('action', () => {
           return process.env.GPG_PRIVATE_KEY;
         case 'directory':
           return path.join(process.cwd(), 'javaTest/with-gpg');
+        case 'maven_args':
+          return '-DskipTests -Dcheckstyle.skip';
         default:
           return '';
       }
@@ -104,6 +106,8 @@ describe('action', () => {
           return process.env.GPG_PRIVATE_KEY;
         case 'directory':
           return path.join(process.cwd(), 'javaTest/with-gpg');
+        case 'maven_args':
+          return '-DskipTests -Dcheckstyle.skip';
         default:
           return '';
       }

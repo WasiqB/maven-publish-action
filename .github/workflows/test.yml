@@ -51,7 +51,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v3
         with:
           version: latest
 

@@ -16,7 +16,7 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name }}
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v3
         with:
           version: latest
 

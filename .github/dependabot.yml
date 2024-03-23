@@ -9,10 +9,8 @@ updates:
       interval: weekly
       timezone: "Asia/Calcutta"
     groups:
-      production:
-        dependency-type: "production"
-      development:
-        dependency-type: "development"
+      dependencies:
+        update-types: ['major', 'minor', 'patch']
 
   - package-ecosystem: "maven"
     directory: "/javaTest/with-gpg"

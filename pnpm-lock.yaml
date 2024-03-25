@@ -18,8 +18,8 @@ devDependencies:
     specifier: ^1.7.0
     version: 1.7.0(eslint@8.57.0)(typescript@5.4.3)
   '@tsconfig/node18':
-    specifier: ^18.2.2
-    version: 18.2.2
+    specifier: ^18.2.3
+    version: 18.2.3
   '@types/jest':
     specifier: ^29.5.12
     version: 29.5.12
@@ -906,8 +906,8 @@ packages:
       - typescript
     dev: true
 
-  /@tsconfig/node18@18.2.2:
-    resolution: {integrity: sha512-d6McJeGsuoRlwWZmVIeE8CUA27lu6jLjvv1JzqmpsytOYYbVi1tHZEnwCNVOXnj4pyLvneZlFlpXUK+X9wBWyw==}
+  /@tsconfig/node18@18.2.3:
+    resolution: {integrity: sha512-5GKTU9bfn4L37G9IdK8wcHfvyMijzw1uKNCd2Rs75V7fZK/l2OjGJ8Aa2myqNnESjekm/udpCnFH9qR9yPCtmw==}
     dev: true
 
   /@types/babel__core@7.20.5:

@@ -30,6 +30,8 @@ describe('action', () => {
           return process.env.NEXUS_PASSWORD ?? '';
         case 'directory':
           return path.join(process.cwd(), 'javaTest/without-gpg');
+        case 'maven_profiles':
+          return 'deploy';
         default:
           return '';
       }
@@ -76,6 +78,8 @@ describe('action', () => {
         case 'nexus_username':
         case 'nexus_password':
           return '';
+        case 'maven_profiles':
+          return 'deploy';
         case 'directory':
           return path.join(process.cwd(), 'javaTest/without-gpg');
         default:
@@ -101,7 +105,7 @@ describe('action', () => {
         case 'nexus_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'maven_profiles':
-          return 'release';
+          return 'deploy';
         case 'gpg_private_key':
           return process.env.GPG_PRIVATE_KEY ?? '';
         case 'directory':

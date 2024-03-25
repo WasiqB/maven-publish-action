@@ -90,8 +90,10 @@ export async function runAction(): Promise<void> {
       getInputOption('directory', false)
     );
     core.setOutput('published', true);
-  } catch (error: any) {
-    core.setFailed(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+    }
     core.setOutput('published', false);
   }
 }

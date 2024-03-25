@@ -68,3 +68,50 @@ jobs:
 
       - name: Run Test
         run: pnpm test
+
+  test-workflow:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: latest
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: |
+          pnpm add -g @vercel/ncc
+          pnpm install && pnpm bundle
+
+      - name: Check the workflow
+        id: test-action
+        uses: ./
+        with:
+          gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ env.GPG_PASSPHRASE }}
+          nexus_username: ${{ env.NEXUS_USERNAME }}
+          nexus_password: ${{ env.NEXUS_PASSWORD }}
+          maven_profiles: deploy
+          server_id: ossrh
+          directory: ${{ github.workspace }}/javaTest/with-gpg
+          maven_args: -DskipTests -Dcheckstyle.skip
+
+      - name: Print Output
+        id: output
+        run: echo "${{ steps.test-action.outputs.published }}"

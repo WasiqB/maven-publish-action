@@ -17,6 +17,7 @@ function run(
   cwd: string | URL | undefined = undefined
 ): string | Buffer {
   try {
+    core.debug(`Running command: ${cmd} ${args.join(' ')}`);
     return execFileSync(cmd, args, { encoding: 'utf8', stdio: 'inherit', cwd: cwd });
   } catch (error: any) {
     throw new Error(`Error encountered while running command: ${error.message}`);
@@ -39,9 +40,14 @@ function getInputOption(
     trimWhitespace: true,
     required,
   } satisfies core.InputOptions;
-  const value = core.getInput(name, options) || defaultValue;
-  if (!value && required) {
-    throw new Error(`Input value [${name}] is required which is not set...`);
+  const value = core.getInput(name, options);
+  if (value.trim().length === 0) {
+    if (defaultValue.trim().length > 0) {
+      return defaultValue;
+    }
+    if (required) {
+      throw new Error(`Input value [${name}] is required which is not set...`);
+    }
   }
   return value;
 }
@@ -84,8 +90,10 @@ export async function runAction(): Promise<void> {
       getInputOption('directory', false)
     );
     core.setOutput('published', true);
-  } catch (error: any) {
-    core.setFailed(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+    }
     core.setOutput('published', false);
   }
 }

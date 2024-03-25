@@ -1,8 +1,8 @@
 {
   "name": "maven-publish-action",
-  "version": "1.0.0",
+  "version": "2.4.0",
   "description": "GitHub Action for automatically publishing to Maven central",
-	"type": "module",
+  "type": "module",
   "author": {
     "name": "Wasiq Bhamla",
     "email": "wasbhamla2005@gmail.com",
@@ -11,6 +11,9 @@
   "repository": "github:WasiqB/maven-publish-action",
   "private": true,
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "bundle": "npm run format:fix && npm run package",
     "lint": "eslint 'src/*.ts'",
@@ -25,11 +28,11 @@
     "@actions/github": "^6.0.0",
     "@stylistic/eslint-plugin-js": "^1.7.0",
     "@stylistic/eslint-plugin-ts": "^1.7.0",
-    "@tsconfig/node18": "^18.2.2",
+    "@tsconfig/node18": "^18.2.3",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.28",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
     "eslint": "8.57.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "^9.1.0",
@@ -38,7 +41,7 @@
     "jest": "^29.7.0",
     "prettier": "^3.2.5",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   },
   "jest": {
     "preset": "ts-jest",

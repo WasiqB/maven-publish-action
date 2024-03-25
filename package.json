@@ -1,6 +1,6 @@
 {
   "name": "maven-publish-action",
-  "version": "1.0.0",
+  "version": "2.4.0",
   "description": "GitHub Action for automatically publishing to Maven central",
   "type": "module",
   "author": {

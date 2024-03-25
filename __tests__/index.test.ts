@@ -4,11 +4,11 @@ import path from 'path';
 
 const runMock = jest.spyOn(index, 'runAction');
 
-let debugMock: jest.SpyInstance;
-let errorMock: jest.SpyInstance;
-let getInputMock: jest.SpyInstance;
-let setFailedMock: jest.SpyInstance;
-let setOutputMock: jest.SpyInstance;
+let debugMock: jest.SpiedFunction<typeof core.debug>;
+let errorMock: jest.SpiedFunction<typeof core.error>;
+let getInputMock: jest.SpiedFunction<typeof core.getInput>;
+let setFailedMock: jest.SpiedFunction<typeof core.setFailed>;
+let setOutputMock: jest.SpiedFunction<typeof core.setOutput>;
 
 describe('action', () => {
   beforeEach(() => {
@@ -22,12 +22,12 @@ describe('action', () => {
   });
 
   it('test publish without gpg', async () => {
-    getInputMock.mockImplementation((name: string): string | undefined => {
+    getInputMock.mockImplementation((name: string): string => {
       switch (name) {
         case 'nexus_username':
-          return process.env.NEXUS_USERNAME;
+          return process.env.NEXUS_USERNAME ?? '';
         case 'nexus_password':
-          return process.env.NEXUS_PASSWORD;
+          return process.env.NEXUS_PASSWORD ?? '';
         case 'directory':
           return path.join(process.cwd(), 'javaTest/without-gpg');
         default:
@@ -44,14 +44,14 @@ describe('action', () => {
   });
 
   it('test publish with gpg', async () => {
-    getInputMock.mockImplementation((name: string): string | undefined => {
+    getInputMock.mockImplementation((name: string): string => {
       switch (name) {
         case 'nexus_username':
-          return process.env.NEXUS_USERNAME;
+          return process.env.NEXUS_USERNAME ?? '';
         case 'nexus_password':
-          return process.env.NEXUS_PASSWORD;
+          return process.env.NEXUS_PASSWORD ?? '';
         case 'gpg_private_key':
-          return process.env.GPG_PRIVATE_KEY;
+          return process.env.GPG_PRIVATE_KEY ?? '';
         case 'directory':
           return path.join(process.cwd(), 'javaTest/with-gpg');
         case 'maven_args':
@@ -65,17 +65,17 @@ describe('action', () => {
     expect(runMock).toHaveReturned();
 
     expect(debugMock).toHaveBeenNthCalledWith(1, 'Importing GPG key…');
-    expect(debugMock).toHaveBeenNthCalledWith(2, 'Deploying the Maven project…');
+    expect(debugMock).toHaveBeenNthCalledWith(3, 'Deploying the Maven project…');
     expect(setOutputMock).toHaveBeenNthCalledWith(1, 'published', true);
     expect(errorMock).not.toHaveBeenCalled();
   });
 
   it('test missing required input param', async () => {
-    getInputMock.mockImplementation((name: string): string | undefined => {
+    getInputMock.mockImplementation((name: string): string => {
       switch (name) {
         case 'nexus_username':
         case 'nexus_password':
-          return undefined;
+          return '';
         case 'directory':
           return path.join(process.cwd(), 'javaTest/without-gpg');
         default:
@@ -94,16 +94,16 @@ describe('action', () => {
   });
 
   it('test publish with profile and gpg', async () => {
-    getInputMock.mockImplementation((name: string): string | undefined => {
+    getInputMock.mockImplementation((name: string): string => {
       switch (name) {
         case 'nexus_username':
-          return process.env.NEXUS_USERNAME;
+          return process.env.NEXUS_USERNAME ?? '';
         case 'nexus_password':
-          return process.env.NEXUS_PASSWORD;
+          return process.env.NEXUS_PASSWORD ?? '';
         case 'maven_profiles':
           return 'release';
         case 'gpg_private_key':
-          return process.env.GPG_PRIVATE_KEY;
+          return process.env.GPG_PRIVATE_KEY ?? '';
         case 'directory':
           return path.join(process.cwd(), 'javaTest/with-gpg');
         case 'maven_args':
@@ -117,19 +117,19 @@ describe('action', () => {
     expect(runMock).toHaveReturned();
 
     expect(debugMock).toHaveBeenNthCalledWith(1, 'Importing GPG key…');
-    expect(debugMock).toHaveBeenNthCalledWith(2, 'Deploying the Maven project…');
+    expect(debugMock).toHaveBeenNthCalledWith(3, 'Deploying the Maven project…');
     expect(setOutputMock).toHaveBeenNthCalledWith(1, 'published', true);
     expect(errorMock).not.toHaveBeenCalled();
   });
 
-  it.skip('test publish with incorrect goal', async () => {
+  it('test publish with incorrect goal', async () => {
     const dir = process.cwd();
-    getInputMock.mockImplementation((name: string): string | undefined => {
+    getInputMock.mockImplementation((name: string): string => {
       switch (name) {
         case 'nexus_username':
-          return process.env.NEXUS_USERNAME;
+          return process.env.NEXUS_USERNAME ?? '';
         case 'nexus_password':
-          return process.env.NEXUS_PASSWORD;
+          return process.env.NEXUS_PASSWORD ?? '';
         case 'maven_goals_phases':
           return 'dummy';
         case 'directory':

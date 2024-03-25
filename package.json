@@ -11,6 +11,9 @@
   "repository": "github:WasiqB/maven-publish-action",
   "private": true,
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "bundle": "npm run format:fix && npm run package",
     "lint": "eslint 'src/*.ts'",

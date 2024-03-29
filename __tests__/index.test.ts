@@ -24,9 +24,9 @@ describe('action', () => {
   it('test publish without gpg', async () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
+        case 'server_username':
           return process.env.NEXUS_USERNAME ?? '';
-        case 'nexus_password':
+        case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'directory':
           return path.join(process.cwd(), 'javaTest/without-gpg');
@@ -48,9 +48,9 @@ describe('action', () => {
   it('test publish with gpg', async () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
+        case 'server_username':
           return process.env.NEXUS_USERNAME ?? '';
-        case 'nexus_password':
+        case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'gpg_private_key':
           return process.env.GPG_PRIVATE_KEY ?? '';
@@ -75,8 +75,8 @@ describe('action', () => {
   it('test missing required input param', async () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
-        case 'nexus_password':
+        case 'server_username':
+        case 'server_password':
           return '';
         case 'maven_profiles':
           return 'deploy';
@@ -92,7 +92,7 @@ describe('action', () => {
 
     expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      'Input value [nexus_username] is required which is not set...'
+      'Input value [server_username] is required which is not set...'
     );
     expect(setOutputMock).toHaveBeenNthCalledWith(1, 'published', false);
   });
@@ -100,9 +100,9 @@ describe('action', () => {
   it('test publish with profile and gpg', async () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
+        case 'server_username':
           return process.env.NEXUS_USERNAME ?? '';
-        case 'nexus_password':
+        case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'maven_profiles':
           return 'deploy';
@@ -130,9 +130,9 @@ describe('action', () => {
     const dir = process.cwd();
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
+        case 'server_username':
           return process.env.NEXUS_USERNAME ?? '';
-        case 'nexus_password':
+        case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'maven_goals_phases':
           return 'dummy';
@@ -149,7 +149,7 @@ describe('action', () => {
     expect(debugMock).toHaveBeenNthCalledWith(1, 'Deploying the Maven project…');
     expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      `Error encountered while running command: Command failed: mvn dummy --settings ${dir}/src/settings.xml --batch-mode`
+      `Error encountered while running command: Command failed: mvn dummy --file ${path.join(dir, 'javaTest/without-gpg')}/pom.xml --settings ${dir}/src/settings.xml --batch-mode`
     );
     expect(setOutputMock).toHaveBeenNthCalledWith(1, 'published', false);
   });

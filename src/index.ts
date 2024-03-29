@@ -92,6 +92,7 @@ function getMavenInputs(): {
   directory: string;
   pom: string[];
 } {
+  core.debug('Deploying the Maven project…');
   const mavenArgs = getInputOption('maven_args').split(' ');
   const mavenGoalsPhases = getInputOption('maven_goals_phases', false, 'clean deploy');
   const mavenProfiles = getInputOption('maven_profiles');
@@ -101,7 +102,6 @@ function getMavenInputs(): {
     getInputOption('pom_file_name', false, path.join(directory, 'pom.xml')),
   ];
 
-  core.debug('Deploying the Maven project…');
   const mavenProfileArg = mavenProfiles ? ['--activate-profiles', mavenProfiles] : [''];
   const settingArgs = [
     '--settings',

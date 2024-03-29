@@ -53,7 +53,7 @@ function getInputOption(
 /**
  * Fetch Server related details.
  */
-function fetchServerInputs() {
+function fetchServerInputs(): void {
   const id = getInputOption('server_id');
   const userName = getInputOption('server_username', true);
   const password = getInputOption('server_password', true);
@@ -69,7 +69,7 @@ function fetchServerInputs() {
 /**
  * Fetch GPG Key.
  */
-function fetchGpgKey() {
+function fetchGpgKey(): void {
   const gpgKeyPath = path.join(process.cwd(), 'private-key.txt');
   const privateKey = getInputOption('gpg_private_key').trim();
   if (privateKey) {
@@ -84,7 +84,14 @@ function fetchGpgKey() {
  * Get all the required Maven details as per the user inputs.
  * @returns Maven details.
  */
-function getMavenInputs() {
+function getMavenInputs(): {
+  args: string[];
+  goals: string[];
+  profile: string[];
+  setting: string[];
+  directory: string;
+  pom: string[];
+} {
   const mavenArgs = getInputOption('maven_args').split(' ');
   const mavenGoalsPhases = getInputOption('maven_goals_phases', false, 'clean deploy');
   const mavenProfiles = getInputOption('maven_profiles');

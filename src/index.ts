@@ -3,8 +3,6 @@ import { execFileSync } from 'child_process';
 import { unlinkSync, writeFileSync } from 'fs';
 import path from 'path';
 
-const gpgKeyPath = path.join(process.cwd(), 'private-key.txt');
-
 /**
  * Executes the provided shell command and redirects stdout/stderr to the console
  * @param cmd {string}: Shell command to execute
@@ -53,41 +51,85 @@ function getInputOption(
 }
 
 /**
+ * Fetch Server related details.
+ */
+function fetchServerInputs() {
+  const id = getInputOption('server_id');
+  const userName = getInputOption('server_username', true);
+  const password = getInputOption('server_password', true);
+
+  core.exportVariable('SERVER_ID', id);
+  core.exportVariable('SERVER_USERNAME', userName);
+  core.exportVariable('SERVER_PASSWORD', password);
+
+  core.setSecret('SERVER_USERNAME');
+  core.setSecret('SERVER_PASSWORD');
+}
+
+/**
+ * Fetch GPG Key.
+ */
+function fetchGpgKey() {
+  const gpgKeyPath = path.join(process.cwd(), 'private-key.txt');
+  const privateKey = getInputOption('gpg_private_key').trim();
+  if (privateKey) {
+    core.debug('Importing GPG key…');
+    writeFileSync(gpgKeyPath, privateKey);
+    run('gpg', ['--import', '--batch', `${gpgKeyPath}`]);
+    unlinkSync(gpgKeyPath);
+  }
+}
+
+/**
+ * Get all the required Maven details as per the user inputs.
+ * @returns Maven details.
+ */
+function getMavenInputs() {
+  const mavenArgs = getInputOption('maven_args').split(' ');
+  const mavenGoalsPhases = getInputOption('maven_goals_phases', false, 'clean deploy');
+  const mavenProfiles = getInputOption('maven_profiles');
+  const directory = getInputOption('directory', false, process.cwd());
+  const pomFilePath = [
+    '--file',
+    getInputOption('pom_file_name', false, path.join(directory, 'pom.xml')),
+  ];
+
+  core.debug('Deploying the Maven project…');
+  const mavenProfileArg = mavenProfiles ? ['--activate-profiles', mavenProfiles] : [''];
+  const settingArgs = [
+    '--settings',
+    getInputOption('settings_path', false, path.join(process.cwd(), 'src/settings.xml')),
+  ];
+
+  return {
+    args: mavenArgs,
+    goals: mavenGoalsPhases.split(' '),
+    profile: mavenProfileArg,
+    setting: settingArgs,
+    directory,
+    pom: pomFilePath,
+  };
+}
+
+/**
  * Deploys the Maven project
  */
 export async function runAction(): Promise<void> {
   try {
-    getInputOption('nexus_username', true);
-    getInputOption('nexus_password', true);
-    const mavenArgs = getInputOption('maven_args').split(' ');
-    const mavenGoalsPhases = getInputOption('maven_goals_phases', false, 'clean deploy');
-    const mavenProfiles = getInputOption('maven_profiles');
-
-    const privateKey = getInputOption('gpg_private_key').trim();
-    if (privateKey) {
-      core.debug('Importing GPG key…');
-      writeFileSync(gpgKeyPath, privateKey);
-      run('gpg', ['--import', '--batch', `${gpgKeyPath}`]);
-      unlinkSync(gpgKeyPath);
-    }
-
-    core.debug('Deploying the Maven project…');
-    const mavenProfileArg = mavenProfiles ? ['--activate-profiles', mavenProfiles] : [''];
-    const settingArgs = [
-      '--settings',
-      getInputOption('settings_path', false, path.join(process.cwd(), 'src/settings.xml')),
-    ];
-
+    fetchServerInputs();
+    fetchGpgKey();
+    const maven = getMavenInputs();
     run(
       'mvn',
       [
-        ...mavenGoalsPhases.split(' '),
-        ...settingArgs,
+        ...maven.goals,
+        ...maven.pom,
+        ...maven.setting,
         '--batch-mode',
-        ...mavenArgs,
-        ...mavenProfileArg,
+        ...maven.args,
+        ...maven.profile,
       ].filter((str) => str !== ''),
-      getInputOption('directory', false)
+      maven.directory
     );
     core.setOutput('published', true);
   } catch (error) {

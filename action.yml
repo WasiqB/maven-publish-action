@@ -8,20 +8,21 @@ inputs:
   gpg_passphrase:
     description: Passphrase for the GPG key
     required: false
-  nexus_username:
-    description: Username (not email!) for your Nexus repository manager account
+  server_username:
+    description: Username for your repository manager account
     required: true
-  nexus_password:
+  server_password:
     description: Password for your Nexus account
     required: true
   server_id:
-    description: |
-      Nexus server ID as specified in your project's
-      `nexus-staging-maven-plugin` and `distributionManagement` configurations
+    description: Server ID of the repository management server
     required: false
     default: ossrh
   directory:
     description: Directory of the Maven project which should be deployed
+    required: false
+  pom_file_name:
+    description: POM file name
     required: false
   settings_path:
     description: Directory path for Maven settings file

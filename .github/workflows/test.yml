@@ -105,11 +105,12 @@ jobs:
         with:
           gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
           gpg_passphrase: ${{ env.GPG_PASSPHRASE }}
-          nexus_username: ${{ env.NEXUS_USERNAME }}
-          nexus_password: ${{ env.NEXUS_PASSWORD }}
+          server_username: ${{ env.NEXUS_USERNAME }}
+          server_password: ${{ env.NEXUS_PASSWORD }}
           maven_profiles: deploy
           server_id: ossrh
           directory: ${{ github.workspace }}/javaTest/with-gpg
+          pom_file_name: pom.xml
           maven_args: -DskipTests -Dcheckstyle.skip
 
       - name: Print Output

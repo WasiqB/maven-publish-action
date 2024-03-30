@@ -111,8 +111,7 @@ jobs:
           server_password: ${{ env.NEXUS_PASSWORD }}
           maven_profiles: deploy
           server_id: ossrh
-          directory: ${{ github.workspace }}/java-test/nexus
-          pom_file_name: pom-with-gpg.xml
+          directory: ${{ github.workspace }}/java-test/nexus/with-gpg
           maven_args: -DskipTests -Dcheckstyle.skip
 
       - name: Print Output

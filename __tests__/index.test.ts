@@ -29,9 +29,7 @@ describe('action', () => {
         case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'directory':
-          return path.join(process.cwd(), 'java-test/nexus');
-        case 'pom_file_name':
-          return 'pom-without-gpg.xml';
+          return path.join(process.cwd(), 'java-test/nexus/without-gpg');
         case 'maven_profiles':
           return 'deploy';
         default:
@@ -57,9 +55,7 @@ describe('action', () => {
         case 'gpg_private_key':
           return process.env.GPG_PRIVATE_KEY ?? '';
         case 'directory':
-          return path.join(process.cwd(), 'java-test/nexus');
-        case 'pom_file_name':
-          return 'pom-with-gpg.xml';
+          return path.join(process.cwd(), 'java-test/nexus/with-gpg');
         case 'maven_args':
           return '-DskipTests -Dcheckstyle.skip';
         default:
@@ -85,9 +81,7 @@ describe('action', () => {
         case 'maven_profiles':
           return 'deploy';
         case 'directory':
-          return path.join(process.cwd(), 'java-test/nexus');
-        case 'pom_file_name':
-          return 'pom-without-gpg.xml';
+          return path.join(process.cwd(), 'java-test/nexus/without-gpg');
         default:
           return '';
       }
@@ -115,9 +109,7 @@ describe('action', () => {
         case 'gpg_private_key':
           return process.env.GPG_PRIVATE_KEY ?? '';
         case 'directory':
-          return path.join(process.cwd(), 'java-test/nexus');
-        case 'pom_file_name':
-          return 'pom-with-profiles.xml';
+          return path.join(process.cwd(), 'java-test/nexus/with-profiles');
         case 'maven_args':
           return '-DskipTests -Dcheckstyle.skip';
         default:
@@ -145,9 +137,7 @@ describe('action', () => {
         case 'maven_goals_phases':
           return 'dummy';
         case 'directory':
-          return path.join(dir, 'java-test/nexus');
-        case 'pom_file_name':
-          return 'pom-without-gpg.xml';
+          return path.join(dir, 'java-test/nexus/without-gpg');
         default:
           return '';
       }
@@ -159,7 +149,7 @@ describe('action', () => {
     expect(debugMock).toHaveBeenNthCalledWith(1, 'Deploying the Maven project…');
     expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      `Error encountered while running command: Command failed: mvn dummy --file pom-without-gpg.xml --settings ${dir}/src/settings.xml --batch-mode`
+      `Error encountered while running command: Command failed: mvn dummy --file ${path.join(dir, 'java-test/nexus/without-gpg')}/pom.xml --settings ${dir}/src/settings.xml --batch-mode`
     );
     expect(setOutputMock).toHaveBeenNthCalledWith(1, 'published', false);
   });

@@ -13,7 +13,7 @@ updates:
         update-types: ['major', 'minor', 'patch']
 
   - package-ecosystem: "maven"
-    directory: "/javaTest/with-gpg"
+    directory: "/java-test/nexus/with-gpg"
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
@@ -24,7 +24,7 @@ updates:
         dependency-type: "production"
 
   - package-ecosystem: "maven"
-    directory: "/javaTest/with-profiles"
+    directory: "/java-test/nexus/with-profiles"
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
@@ -35,7 +35,18 @@ updates:
         dependency-type: "production"
 
   - package-ecosystem: "maven"
-    directory: "/javaTest/without-gpg"
+    directory: "/java-test/nexus/without-gpg"
+    target-branch: "main"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: weekly
+      timezone: "Asia/Calcutta"
+    groups:
+      production:
+        dependency-type: "production"
+
+  - package-ecosystem: "maven"
+    directory: "/java-test/central"
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:

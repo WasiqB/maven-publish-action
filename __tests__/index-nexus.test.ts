@@ -10,7 +10,7 @@ let getInputMock: jest.SpiedFunction<typeof core.getInput>;
 let setFailedMock: jest.SpiedFunction<typeof core.setFailed>;
 let setOutputMock: jest.SpiedFunction<typeof core.setOutput>;
 
-describe('action', () => {
+describe('test maven publish action', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -24,12 +24,12 @@ describe('action', () => {
   it('test publish without gpg', async () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
+        case 'server_username':
           return process.env.NEXUS_USERNAME ?? '';
-        case 'nexus_password':
+        case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'directory':
-          return path.join(process.cwd(), 'javaTest/without-gpg');
+          return path.join(process.cwd(), 'java-test/nexus/without-gpg');
         case 'maven_profiles':
           return 'deploy';
         default:
@@ -48,14 +48,14 @@ describe('action', () => {
   it('test publish with gpg', async () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
+        case 'server_username':
           return process.env.NEXUS_USERNAME ?? '';
-        case 'nexus_password':
+        case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'gpg_private_key':
           return process.env.GPG_PRIVATE_KEY ?? '';
         case 'directory':
-          return path.join(process.cwd(), 'javaTest/with-gpg');
+          return path.join(process.cwd(), 'java-test/nexus/with-gpg');
         case 'maven_args':
           return '-DskipTests -Dcheckstyle.skip';
         default:
@@ -75,13 +75,13 @@ describe('action', () => {
   it('test missing required input param', async () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
-        case 'nexus_password':
+        case 'server_username':
+        case 'server_password':
           return '';
         case 'maven_profiles':
           return 'deploy';
         case 'directory':
-          return path.join(process.cwd(), 'javaTest/without-gpg');
+          return path.join(process.cwd(), 'java-test/nexus/without-gpg');
         default:
           return '';
       }
@@ -92,7 +92,7 @@ describe('action', () => {
 
     expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      'Input value [nexus_username] is required which is not set...'
+      'Input value [server_username] is required which is not set...'
     );
     expect(setOutputMock).toHaveBeenNthCalledWith(1, 'published', false);
   });
@@ -100,16 +100,16 @@ describe('action', () => {
   it('test publish with profile and gpg', async () => {
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
+        case 'server_username':
           return process.env.NEXUS_USERNAME ?? '';
-        case 'nexus_password':
+        case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'maven_profiles':
-          return 'deploy';
+          return 'release';
         case 'gpg_private_key':
           return process.env.GPG_PRIVATE_KEY ?? '';
         case 'directory':
-          return path.join(process.cwd(), 'javaTest/with-gpg');
+          return path.join(process.cwd(), 'java-test/nexus/with-profiles');
         case 'maven_args':
           return '-DskipTests -Dcheckstyle.skip';
         default:
@@ -130,14 +130,14 @@ describe('action', () => {
     const dir = process.cwd();
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        case 'nexus_username':
+        case 'server_username':
           return process.env.NEXUS_USERNAME ?? '';
-        case 'nexus_password':
+        case 'server_password':
           return process.env.NEXUS_PASSWORD ?? '';
         case 'maven_goals_phases':
           return 'dummy';
         case 'directory':
-          return path.join(dir, 'javaTest/without-gpg');
+          return path.join(dir, 'java-test/nexus/without-gpg');
         default:
           return '';
       }
@@ -149,7 +149,7 @@ describe('action', () => {
     expect(debugMock).toHaveBeenNthCalledWith(1, 'Deploying the Maven project…');
     expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      `Error encountered while running command: Command failed: mvn dummy --settings ${dir}/src/settings.xml --batch-mode`
+      `Error encountered while running command: Command failed: mvn dummy --file ${path.join(dir, 'java-test/nexus/without-gpg')}/pom.xml --settings ${dir}/src/settings.xml --batch-mode`
     );
     expect(setOutputMock).toHaveBeenNthCalledWith(1, 'published', false);
   });

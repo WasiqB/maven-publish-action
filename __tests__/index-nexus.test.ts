@@ -10,7 +10,7 @@ let getInputMock: jest.SpiedFunction<typeof core.getInput>;
 let setFailedMock: jest.SpiedFunction<typeof core.setFailed>;
 let setOutputMock: jest.SpiedFunction<typeof core.setOutput>;
 
-describe('action', () => {
+describe('test maven publish action', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 

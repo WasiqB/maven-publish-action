@@ -35,6 +35,7 @@ jobs:
 
   test:
     needs: check-env-key
+    name: Test Action
 
     if: (github.event_name == 'push' || github.repository == github.event.pull_request.head.repo.full_name) && needs.check-env-key.outputs.env-present == 'YES'
 
@@ -71,6 +72,7 @@ jobs:
 
   test-workflow:
     needs: test
+    name: Test Workflow
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -109,8 +111,8 @@ jobs:
           server_password: ${{ env.NEXUS_PASSWORD }}
           maven_profiles: deploy
           server_id: ossrh
-          directory: ${{ github.workspace }}/javaTest/with-gpg
-          pom_file_name: pom.xml
+          directory: ${{ github.workspace }}/java-test/nexus
+          pom_file_name: pom-with-gpg.xml
           maven_args: -DskipTests -Dcheckstyle.skip
 
       - name: Print Output

@@ -146,10 +146,14 @@ describe('test maven publish action', () => {
     await index.runAction();
     expect(runMock).toHaveReturned();
 
+    const pomPath = `${path.join(dir, 'java-test/nexus/without-gpg')}/pom.xml`;
+    const settingsPath = `${dir}/src/settings.xml`;
+
     expect(debugMock).toHaveBeenNthCalledWith(1, 'Deploying the Maven project…');
     expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      `Error encountered while running command: Command failed: mvn dummy --file ${path.join(dir, 'java-test/nexus/without-gpg')}/pom.xml --settings ${dir}/src/settings.xml --batch-mode`
+      `Error occurred:
+Command failed: mvn dummy --file ${pomPath} --settings ${settingsPath} --batch-mode`
     );
     expect(setOutputMock).toHaveBeenNthCalledWith(1, 'published', false);
   });

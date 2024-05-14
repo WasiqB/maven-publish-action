@@ -18,7 +18,8 @@ function run(
     core.debug(`Running command: ${cmd} ${args.join(' ')}`);
     return execFileSync(cmd, args, { encoding: 'utf8', stdio: 'inherit', cwd: cwd });
   } catch (error: any) {
-    throw new Error(`Error encountered while running command: ${error.message}`);
+    throw new Error(`Error occurred:
+${error.message}`);
   }
 }
 

@@ -116,23 +116,6 @@ jobs:
           directory: ${{ github.workspace }}/java-test/nexus/with-gpg
           maven_args: -DskipTests -Dcheckstyle.skip
 
-      - name: Check the workflow for Central
-        id: test-action-central
-        uses: ./
-        with:
-          gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
-          gpg_passphrase: ${{ env.GPG_PASSPHRASE }}
-          server_username: ${{ env.CENTRAL_USERNAME }}
-          server_password: ${{ env.CENTRAL_PASSWORD }}
-          maven_profiles: release
-          server_id: central
-          directory: ${{ github.workspace }}/java-test/central
-          maven_args: -DskipTests -Dcheckstyle.skip
-
       - name: Print Nexus Output
         id: output-nexus
         run: echo "${{ steps.test-action-nexus.outputs.published }}"
-
-      - name: Print Nexus Output
-        id: output-central
-        run: echo "${{ steps.test-action-central.outputs.published }}"

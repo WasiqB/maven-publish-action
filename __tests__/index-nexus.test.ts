@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as core from '@actions/core';
 import * as index from '../src/index';
 import path from 'path';
@@ -7,6 +8,7 @@ const runMock = jest.spyOn(index, 'runAction');
 let debugMock: jest.SpiedFunction<typeof core.debug>;
 let errorMock: jest.SpiedFunction<typeof core.error>;
 let getInputMock: jest.SpiedFunction<typeof core.getInput>;
+let getBooleanInputMock: jest.SpiedFunction<typeof core.getBooleanInput>;
 let setFailedMock: jest.SpiedFunction<typeof core.setFailed>;
 let setOutputMock: jest.SpiedFunction<typeof core.setOutput>;
 
@@ -17,6 +19,7 @@ describe('test maven publish action', () => {
     debugMock = jest.spyOn(core, 'debug').mockImplementation();
     errorMock = jest.spyOn(core, 'error').mockImplementation();
     getInputMock = jest.spyOn(core, 'getInput').mockImplementation();
+    getBooleanInputMock = jest.spyOn(core, 'getBooleanInput').mockImplementation();
     setFailedMock = jest.spyOn(core, 'setFailed').mockImplementation();
     setOutputMock = jest.spyOn(core, 'setOutput').mockImplementation();
   });
@@ -142,7 +145,6 @@ describe('test maven publish action', () => {
           return '';
       }
     });
-
     await index.runAction();
     expect(runMock).toHaveReturned();
 

@@ -6,7 +6,7 @@ updates:
     versioning-strategy: increase
     open-pull-requests-limit: 100
     schedule:
-      interval: weekly
+      interval: monthly
       timezone: "Asia/Calcutta"
     groups:
       dependencies:
@@ -17,7 +17,7 @@ updates:
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: weekly
+      interval: quarterly
       timezone: "Asia/Calcutta"
     groups:
       production:
@@ -28,7 +28,7 @@ updates:
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: weekly
+      interval: quarterly
       timezone: "Asia/Calcutta"
     groups:
       production:
@@ -39,7 +39,7 @@ updates:
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: weekly
+      interval: quarterly
       timezone: "Asia/Calcutta"
     groups:
       production:
@@ -50,7 +50,7 @@ updates:
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: weekly
+      interval: quarterly
       timezone: "Asia/Calcutta"
     groups:
       production:
@@ -61,7 +61,7 @@ updates:
     target-branch: "main"
     open-pull-requests-limit: 100
     schedule:
-      interval: weekly
+      interval: monthly
       timezone: "Asia/Calcutta"
     groups:
       production:

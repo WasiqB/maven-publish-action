@@ -1,4 +1,4 @@
-name: Test
+name: Test Action
 
 on:
   push:
@@ -51,8 +51,8 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: 17
-          distribution: 'temurin'
-          cache: 'maven'
+          distribution: "temurin"
+          cache: "maven"
 
       - uses: pnpm/action-setup@v4
         with:
@@ -61,8 +61,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 18
-          cache: 'pnpm'
+          node-version: 22
+          cache: "pnpm"
 
       - name: Install dependencies
         run: |
@@ -85,8 +85,8 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: 17
-          distribution: 'temurin'
-          cache: 'maven'
+          distribution: "temurin"
+          cache: "maven"
 
       - uses: pnpm/action-setup@v4
         with:
@@ -95,8 +95,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 18
-          cache: 'pnpm'
+          node-version: 22
+          cache: "pnpm"
 
       - name: Install dependencies
         run: |

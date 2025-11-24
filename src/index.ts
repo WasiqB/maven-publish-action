@@ -35,10 +35,10 @@ function getInputOption(
   required: boolean = false,
   defaultValue: string = ''
 ): string {
-  const options = {
+  const options: core.InputOptions = {
     trimWhitespace: true,
     required,
-  } satisfies core.InputOptions;
+  };
   const value = core.getInput(name, options);
   if (value.trim().length === 0) {
     if (defaultValue.trim().length > 0) {
@@ -49,6 +49,14 @@ function getInputOption(
     }
   }
   return value;
+}
+
+function getBooleanInputOption(
+  name: string,
+  required: boolean = false,
+  defaultValue: boolean = true
+): boolean {
+  return core.getBooleanInput(name, { required, trimWhitespace: true }) || defaultValue;
 }
 
 /**
@@ -92,6 +100,7 @@ function getMavenInputs(): {
   setting: string[];
   directory: string;
   pom: string[];
+  batchMode: boolean;
 } {
   core.debug('Deploying the Maven project…');
   const mavenArgs = getInputOption('maven_args').split(' ');
@@ -108,6 +117,7 @@ function getMavenInputs(): {
     '--settings',
     getInputOption('settings_path', false, path.join(process.cwd(), 'src/settings.xml')),
   ];
+  const batchMode = getBooleanInputOption('batch_mode', false);
 
   return {
     args: mavenArgs,
@@ -116,6 +126,7 @@ function getMavenInputs(): {
     setting: settingArgs,
     directory,
     pom: pomFilePath,
+    batchMode,
   };
 }
 
@@ -133,7 +144,7 @@ export async function runAction(): Promise<void> {
         ...maven.goals,
         ...maven.pom,
         ...maven.setting,
-        '--batch-mode',
+        maven.batchMode ? '--batch-mode' : '',
         ...maven.args,
         ...maven.profile,
       ].filter((str) => str !== ''),
@@ -148,4 +159,6 @@ export async function runAction(): Promise<void> {
   }
 }
 
-runAction();
+if (require.main === module) {
+  void runAction();
+}

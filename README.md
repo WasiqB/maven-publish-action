@@ -65,11 +65,11 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.gpg_private_key }}
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
-          nexus_username: ${{ secrets.nexus_username }}
-          nexus_password: ${{ secrets.nexus_password }}
+          server_username: ${{ secrets.server_username }}
+          server_password: ${{ secrets.server_password }}
 ```
 
-The action will now run every time you push to `master`.
+The action will now run every time you push to `main`.
 
 ## Configuration
 
@@ -79,11 +79,12 @@ Following are the supported options which you can use with this GitHub Actions:
 | ----------- | ----------- | --------- | ------- |
 | `gpg_private_key` | GPG private key for signing the published artifacts | ❌ | `null` |
 | `gpg_passphrase` | Passphrase for the GPG key | ❌ | `null` |
-| `nexus_username` | Username (not email!) for your Nexus repository manager account | ✅ | `null` |
-| `nexus_password` | Password for your Nexus account | ✅ | `null` |
-| `server_id` | Nexus server ID as specified in your project's `nexus-staging-maven-plugin` and `distributionManagement` configurations | ❌ | `ossrh` |
+| `server_username` | Username (not email!) for your Repository manager account | ✅ | `null` |
+| `server_password` | Password for your Repository manager account | ✅ | `null` |
+| `server_id` | Server ID of the repository management server | ❌ | `ossrh` |
 | `directory` | Directory of the Maven project which should be deployed | ❌ | `root-dir` |
 | `settings_path` | Directory path for Maven settings file | ❌ | `null` |
 | `maven_goals_phases` | Maven goals and build phases to execute | ❌ | `clean deploy` |
 | `maven_args` | Additional arguments to pass to the Maven command | ❌ | `` |
 | `maven_profiles` | Active Maven profiles | ❌ | `deploy` |
+| `batch_mode` | Whether to run Maven in batch mode | ❌ | `true` |

@@ -39,6 +39,9 @@ inputs:
     description: Active Maven profiles
     required: false
     default: deploy
+  batch_mode:
+    description: Enable Maven batch mode for non-interactive builds
+    required: false
 runs:
   using: node20
   main: dist/index.js

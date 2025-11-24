@@ -42,6 +42,7 @@ inputs:
   batch_mode:
     description: Enable Maven batch mode for non-interactive builds
     required: false
+    default: 'true'
 runs:
   using: node20
   main: dist/index.js

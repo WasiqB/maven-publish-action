@@ -38,12 +38,6 @@ describe('test maven publish action', () => {
           return '';
       }
     });
-    getBooleanInputMock.mockImplementation((name: string): boolean => {
-      if (name === 'batch_mode') {
-        return true;
-      }
-      return false;
-    });
 
     await index.runAction();
     expect(runMock).toHaveReturned();
@@ -150,13 +144,6 @@ describe('test maven publish action', () => {
           return '';
       }
     });
-    getBooleanInputMock.mockImplementation((name: string): boolean => {
-      if (name === 'batch_mode') {
-        return true;
-      }
-      return false;
-    });
-
     await index.runAction();
     expect(runMock).toHaveReturned();
 

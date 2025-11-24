@@ -159,4 +159,6 @@ export async function runAction(): Promise<void> {
   }
 }
 
-runAction();
+if (require.main === module) {
+  void runAction();
+}

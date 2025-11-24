@@ -51,9 +51,12 @@ function getInputOption(
   return value;
 }
 
-function getBooleanInputOption(name: string, required: boolean = false): boolean {
-  const value = core.getBooleanInput(name, { required });
-  return value;
+function getBooleanInputOption(
+  name: string,
+  required: boolean = false,
+  defaultValue: boolean = true
+): boolean {
+  return core.getBooleanInput(name, { required, trimWhitespace: true }) || defaultValue;
 }
 
 /**
@@ -123,7 +126,7 @@ function getMavenInputs(): {
     setting: settingArgs,
     directory,
     pom: pomFilePath,
-    batchMode
+    batchMode,
   };
 }
 

@@ -7,6 +7,7 @@ const runMock = jest.spyOn(index, 'runAction');
 let debugMock: jest.SpiedFunction<typeof core.debug>;
 let errorMock: jest.SpiedFunction<typeof core.error>;
 let getInputMock: jest.SpiedFunction<typeof core.getInput>;
+let getBooleanInputMock: jest.SpiedFunction<typeof core.getBooleanInput>;
 let setFailedMock: jest.SpiedFunction<typeof core.setFailed>;
 let setOutputMock: jest.SpiedFunction<typeof core.setOutput>;
 
@@ -17,6 +18,7 @@ describe('test maven publish action', () => {
     debugMock = jest.spyOn(core, 'debug').mockImplementation();
     errorMock = jest.spyOn(core, 'error').mockImplementation();
     getInputMock = jest.spyOn(core, 'getInput').mockImplementation();
+    getBooleanInputMock = jest.spyOn(core, 'getBooleanInput').mockImplementation();
     setFailedMock = jest.spyOn(core, 'setFailed').mockImplementation();
     setOutputMock = jest.spyOn(core, 'setOutput').mockImplementation();
   });
@@ -35,6 +37,12 @@ describe('test maven publish action', () => {
         default:
           return '';
       }
+    });
+    getBooleanInputMock.mockImplementation((name: string): boolean => {
+      if (name === 'batch_mode') {
+        return true;
+      }
+      return false;
     });
 
     await index.runAction();
@@ -141,6 +149,12 @@ describe('test maven publish action', () => {
         default:
           return '';
       }
+    });
+    getBooleanInputMock.mockImplementation((name: string): boolean => {
+      if (name === 'batch_mode') {
+        return true;
+      }
+      return false;
     });
 
     await index.runAction();

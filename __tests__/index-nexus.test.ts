@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as core from '@actions/core';
 import * as index from '../src/index';
 import path from 'path';

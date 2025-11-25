@@ -1,6 +1,6 @@
 {
   "name": "maven-publish-action",
-  "version": "2.12.0",
+  "version": "2.13.0",
   "description": "GitHub Action for automatically publishing to Maven central",
   "author": {
     "name": "Wasiq Bhamla",

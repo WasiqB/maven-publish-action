@@ -45,10 +45,10 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v5.6.0
         with:
           java-version: 17
           distribution: "temurin"
@@ -59,7 +59,7 @@ jobs:
           version: latest
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: "pnpm"
@@ -79,10 +79,10 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v5.6.0
         with:
           java-version: 17
           distribution: "temurin"
@@ -93,7 +93,7 @@ jobs:
           version: latest
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: "pnpm"
